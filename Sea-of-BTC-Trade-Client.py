@@ -29,6 +29,20 @@ NORM_FONT = ("Helvetica", 10)
 #tk.Tk.iconbitmap(default='favicon.ico')
 #lab = Label(TK, text='Window with transparent icon.')
 
+##DataPace = '1d'
+##paneCount = 1
+##chartLoad = True
+##refreshRate = 2000
+##resampleSize = '15Min'
+##candleWidth = .008
+##exchange = 'BTC-e'
+##programName = 'btce'
+##topIndicator = "none"
+##bottomIndicator = "none"
+##EMAs = []
+##SMAs = []
+
+
 DataPace = '1d'
 paneCount = 1
 chartLoad = True
@@ -37,8 +51,9 @@ resampleSize = '15Min'
 candleWidth = .008
 exchange = 'BTC-e'
 programName = 'btce'
-topIndicator = "macd"
+topIndicator = "none"
 bottomIndicator = "none"
+middleIndicators = "none"
 EMAs = []
 SMAs = []
 
@@ -117,9 +132,116 @@ def addTopIndicator(what):
 
 def addMiddleIndicator(what):
     global middleIndicators
+    global DatCounter
     if DataPace == "tick":
         popupmsg("Indicators in Tick Data not available, choose 1 minute tf if you want short term.")
-    middleIndicators = what
+
+    if what != "none":
+        if middleIndicators == "none":
+
+            if what == "sma":
+                midIQ = tk.Tk()
+                midIQ.wm_title("Periods?")
+                label = ttk.Label(midIQ, text="Choose how many periods you want each SMA calculation to consider.\nThese periods are contingent on your current time settings on the chart.\n1 period = 1 OHLC candlestick.", font=NORM_FONT)
+                label.pack(side="top", fill="x", pady=10)
+                e = ttk.Entry(midIQ)
+                e.insert(0,10)
+                e.pack()
+                e.focus_set()
+                def callback():
+                    global middleIndicators
+                    global DatCounter
+                    middleIndicators = []
+                    periods = (e.get())
+                    group = []
+                    group.append("sma")
+                    group.append(int(periods))
+                    middleIndicators.append(group)
+                    DatCounter = 9000
+                    print("mid indicator",middleIndicators)
+                    midIQ.destroy()
+                b = ttk.Button(midIQ, text="Submit", width=10, command=callback)
+                b.pack()
+                tk.mainloop()
+                
+            if what == "ema":
+                midIQ = tk.Tk()
+                midIQ.wm_title("Periods?")
+                label = ttk.Label(midIQ, text="Choose how many periods you want each EMA calculation to consider.\nThese periods are contingent on your current time settings on the chart.\n1 period = 1 OHLC candlestick.", font=NORM_FONT)
+                label.pack(side="top", fill="x", pady=10)
+                e = ttk.Entry(midIQ)
+                e.insert(0,10)
+                e.pack()
+                e.focus_set()
+                def callback():
+                    global middleIndicators
+                    global DatCounter
+                    middleIndicators = []
+                    periods = (e.get())
+                    group = []
+                    group.append("ema")
+                    group.append(int(periods))
+                    middleIndicators.append(group)
+                    DatCounter = 9000
+                    print("mid indicator",middleIndicators)
+                    midIQ.destroy()
+                b = ttk.Button(midIQ, text="Submit", width=10, command=callback)
+                b.pack()
+                tk.mainloop()
+
+
+        else:
+            if what == "sma":
+                midIQ = tk.Tk()
+                midIQ.wm_title("Periods?")
+                label = ttk.Label(midIQ, text="Choose how many periods you want each SMA calculation to consider.\nThese periods are contingent on your current time settings on the chart.\n1 period = 1 OHLC candlestick.", font=NORM_FONT)
+                label.pack(side="top", fill="x", pady=10)
+                e = ttk.Entry(midIQ)
+                e.insert(0,10)
+                e.pack()
+                e.focus_set()
+                def callback():
+                    global middleIndicators
+                    global DatCounter
+                    periods = (e.get())
+                    group = []
+                    group.append("sma")
+                    group.append(int(periods))
+                    middleIndicators.append(group)
+                    DatCounter = 9000
+                    print("mid indicator",middleIndicators)
+                    midIQ.destroy()
+                b = ttk.Button(midIQ, text="Submit", width=10, command=callback)
+                b.pack()
+                tk.mainloop()
+
+            if what == "ema":
+                midIQ = tk.Tk()
+                midIQ.wm_title("Periods?")
+                label = ttk.Label(midIQ, text="Choose how many periods you want each EMA calculation to consider.\nThese periods are contingent on your current time settings on the chart.\n1 period = 1 OHLC candlestick.", font=NORM_FONT)
+                label.pack(side="top", fill="x", pady=10)
+                e = ttk.Entry(midIQ)
+                e.insert(0,10)
+                e.pack()
+                e.focus_set()
+                def callback():
+                    global middleIndicators
+                    global DatCounter
+                    periods = (e.get())
+                    group = []
+                    group.append("ema")
+                    group.append(int(periods))
+                    middleIndicators.append(group)
+                    DatCounter = 9000
+                    print("mid indicator",middleIndicators)
+                    midIQ.destroy()
+                b = ttk.Button(midIQ, text="Submit", width=10, command=callback)
+                b.pack()
+                tk.mainloop()
+    else:
+        middleIndicators = "none"
+        
+            
 
 
 def addBottomIndicator(what):
@@ -267,13 +389,11 @@ def loadChart(run):
 def animate(i):
     global refreshRate
     global DatCounter
+
+
+
     def moving_average(x, n, type='simple'):
-        """
-        compute an n period moving average.
 
-        type is 'simple' | 'exponential'
-
-        """
         x = np.asarray(x)
         if type=='simple':
             weights = np.ones(n)
@@ -645,10 +765,37 @@ def animate(i):
 
 
                         priceData = OHLC['close'].apply(float).tolist()
+
+                        
+
+                                
                         
                         
 
                         a.clear()
+                        if middleIndicators != "none":
+                            for eachMA in middleIndicators:
+                                ewma = pd.stats.moments.ewma
+                                #print("type:",eachMA[0],"periods:",eachMA[1])
+                                if eachMA[0] == "sma":
+                                    sma = pd.rolling_mean(OHLC["close"],eachMA[1])
+                                    label = str(eachMA[1])+" SMA"
+                                    a.plot(OHLC['MPLDates'],sma, label=label)
+                                if eachMA[0] == "ema":
+                                    ewma = pd.stats.moments.ewma
+                                    label = str(eachMA[1])+" EMA"
+                                    a.plot(OHLC['MPLDates'],ewma(OHLC["close"], eachMA[1]), label=label)
+
+
+                            #a.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
+                            #   ncol=2, borderaxespad=0.)
+
+                            a.legend(loc=0)
+
+
+
+
+                                    
 
                         if topIndicator[0] == "rsi":
                             rsiIndicator(priceData,"top")
@@ -680,8 +827,6 @@ def animate(i):
                             a2.fill_between(volumeData['MPLDates'],0, volumeData['volume'], facecolor='#183A54')#, alpha=.4)
                             a2.set_ylabel("volume")
 
-
-                        
                         
                         a.xaxis.set_major_locator(mticker.MaxNLocator(3))
                         a.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
@@ -882,8 +1027,8 @@ class dashboard(tk.Frame):
         # title and leading text #
         label = tk.Label(self, text="Dashboard", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-        label = tk.Label(self, text="Welcome to the Sea of BTC client dashboard.", font=NORM_FONT)
-        label.pack(side="top", fill="x", pady=10)
+        #label = tk.Label(self, text="Welcome to the Sea of BTC client dashboard.", font=NORM_FONT)
+        #label.pack(side="top", fill="x", pady=10)
 
         # setting up the frame #
         canvas = FigureCanvasTkAgg(f, self)
@@ -966,13 +1111,16 @@ class dashboard(tk.Frame):
                                   command=lambda: addTopIndicator('macd'))
         mb.pack(side='left')
 
-        mb=  ttk.Menubutton ( self, text="Middle Indicator")
+        mb=  ttk.Menubutton ( self, text="Main Graph Indicator")
         mb.menu  =  tk.Menu ( mb, tearoff = 0 )
         mb["menu"]  =  mb.menu
         mb.menu.add_command ( label="None",
                                   command=lambda: addMiddleIndicator('none'))
-        mb.menu.add_command ( label="RSI",
-                                  command=lambda: addMiddleIndicator('none'))
+        mb.menu.add_command ( label="SMA",
+                                  command=lambda: addMiddleIndicator('sma'))
+        mb.menu.add_command ( label="EMA",
+                                  command=lambda: addMiddleIndicator('ema'))
+
         mb.pack(side='left')
 
         mb=  ttk.Menubutton ( self, text="Bottom Indicator")
