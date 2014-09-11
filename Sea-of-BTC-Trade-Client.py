@@ -17,6 +17,8 @@ from matplotlib.finance import candlestick_ohlc
 import matplotlib.dates as mdates
 import matplotlib.ticker as mticker
 import time
+import re
+
 style.use('ggplot')
 
 f = plt.figure()
@@ -64,6 +66,8 @@ lightColor = '#00A3E0'
 
 # OVER 9000!!! lol.
 DatCounter = 9000
+
+
 
 
 def popupmsg(msg):
@@ -383,7 +387,10 @@ def loadChart(run):
         chartLoad = True
     elif run == 'stop':
         chartLoad = False
-
+        
+# ... I know... This is my work around for cx_freeze saying quit is not defined. 
+def quit():
+    quit()
 
         
 def animate(i):
@@ -974,6 +981,7 @@ class StartPage(tk.Frame):
         Sea of BTC makes no promise of warranty, satisfaction, performance, or
         anything else. Understand that your use of this client is completely
         at your own risk.""", font=TITLE_FONT)
+        
 
 
 
@@ -1027,8 +1035,9 @@ class dashboard(tk.Frame):
         # title and leading text #
         label = tk.Label(self, text="Dashboard", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-        #label = tk.Label(self, text="Welcome to the Sea of BTC client dashboard.", font=NORM_FONT)
-        #label.pack(side="top", fill="x", pady=10)
+        if float(Version) < float(latestVersion[0]):
+            label = tk.Label(self, text="There is a new version of the client out! SeaofBTC.com/bitcoin-trading-client", font=NORM_FONT)
+            label.pack(side="top", fill="x", pady=10)
 
         # setting up the frame #
         canvas = FigureCanvasTkAgg(f, self)
@@ -1137,6 +1146,13 @@ class dashboard(tk.Frame):
 
 
 if __name__ == "__main__":
+    Version = '0.00'
+    quickVisit = urllib.request.urlopen("http://seaofbtc.com/bitcoin-trading-client").read()
+    latestVersion = re.findall(r"v(\d+\.\d+)",str(quickVisit))
+
+    
+
+    
     app = SeaofBTCapp()
     app.geometry("1280x720")
     ani = animation.FuncAnimation(f,animate, interval=refreshRate)
