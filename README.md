@@ -1,7 +1,7 @@
 Bitcoin-Trading-Client
 ======================
 
-Bitcoin trading and automated trading made easy and open-source!
+Bitcoin trading and automated trading made easy and open-source.
 
 Image of the application: http://seaofbtc.com/static/images/seaofbtc-bitcoin-trading-client.png
 
