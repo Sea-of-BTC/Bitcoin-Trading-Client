@@ -16,25 +16,26 @@ If you just want the distribution, you can get it from:
 
 
 Features:
-
-Live, automatically updating, prices
-Tick, 1 minute, 5 minute, 15 minute, 30 minute, 1 hour, 3 hour bars.
-Tick, 1 day, 3 day, and 7 day time frames. (can go further back with more support)
-SMA, EMA, RSI and MACD indicators
-Adding and removing indicators as you see fit.
-
+<ul>
+<li>Live, automatically updating, prices</li>
+<li>Tick, 1 minute, 5 minute, 15 minute, 30 minute, 1 hour, 3 hour bars.</li>
+<li>Tick, 1 day, 3 day, and 7 day time frames. (can go further back with more support)</li>
+<li>SMA, EMA, RSI and MACD indicators</li>
+<li>Adding and removing indicators as you see fit.</li>
+</ul>
 
 To come:
-
-More indicators (bollinger bands, aroon, ATR, and a whole lot more.)
-Back Testing
-Manual Trading
-Automated Trading based on Rules / indicators
-Fund management support via Client (use other people's strategies, as well as using the main strategy of Sea of BTC)
-More exchanges
-More crypto-currencies
-Built-in client tutorial. Client will stay simplistic, but can still use a nice tutorial.
-mobile support!
+<ul>
+<li>More indicators (bollinger bands, aroon, ATR, and a whole lot more.)</li>
+<li>Back Testing</li>
+<li>Manual Trading</li>
+<li>Automated Trading based on Rules / indicators</li>
+<li>Fund management support via Client (use other people's strategies, as well as using the main strategy of Sea of BTC)</li>
+<li>More exchanges</li>
+<li>More crypto-currencies</li>
+<li>Built-in client tutorial. Client will stay simplistic, but can still use a nice tutorial.</li>
+<li>mobile support!</li>
+</ul>
 Make a suggestion! If you want to see something, let me know: Harrison@seaofbtc.com
 
 If you want to check it out, and cannot figure out how to get it working, send me an email at Harrison@seaofbtc.com and I'd be happy to help.
