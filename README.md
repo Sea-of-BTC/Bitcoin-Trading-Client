@@ -7,12 +7,13 @@ Image of the application: http://seaofbtc.com/static/images/seaofbtc-bitcoin-tra
 
 The Sea of BTC bitcoin trading client is an open-source trading and automated trading client built for bitcoin and other crypto-currencies. The bitcoin trading client is a work in progress, with development that began in early September 2014.
 
-To use: download the source and the required dependencies: Python 3+, Matplotlib, NumPy, and Pandas. 
-If you just want the distribution, you can get it from: 
+To use, you can get the installer from:
 
 64bit MSI: http://seaofbtc.com/static/downloads/SeaofBTC-Client-0.01-amd64.msi
 
 32bit MSI: http://seaofbtc.com/static/downloads/SeaofBTC-Client-0.01-win32.msi
+
+Or you can download the source and the required dependencies: Python 3+, Matplotlib, NumPy, and Pandas. 
 
 
 Features:
