@@ -109,8 +109,6 @@ def addTopIndicator(what):
         e.focus_set()
 
         def callback():
-            global topIndicator
-            global DatCounter
             periods = (e.get())
             group = []
             group.append("rsi")
@@ -126,8 +124,6 @@ def addTopIndicator(what):
         tk.mainloop()
 
     elif what == "macd":
-        global topIndicator
-        global DatCounter
         topIndicator = "macd"
         DatCounter = 9000
 
@@ -153,8 +149,6 @@ def addMiddleIndicator(what):
                 e.pack()
                 e.focus_set()
                 def callback():
-                    global middleIndicators
-                    global DatCounter
                     middleIndicators = []
                     periods = (e.get())
                     group = []
@@ -178,8 +172,6 @@ def addMiddleIndicator(what):
                 e.pack()
                 e.focus_set()
                 def callback():
-                    global middleIndicators
-                    global DatCounter
                     middleIndicators = []
                     periods = (e.get())
                     group = []
@@ -205,8 +197,6 @@ def addMiddleIndicator(what):
                 e.pack()
                 e.focus_set()
                 def callback():
-                    global middleIndicators
-                    global DatCounter
                     periods = (e.get())
                     group = []
                     group.append("sma")
@@ -229,8 +219,6 @@ def addMiddleIndicator(what):
                 e.pack()
                 e.focus_set()
                 def callback():
-                    global middleIndicators
-                    global DatCounter
                     periods = (e.get())
                     group = []
                     group.append("ema")
@@ -271,8 +259,6 @@ def addBottomIndicator(what):
         e.focus_set()
 
         def callback():
-            global bottomIndicator
-            global DatCounter
             periods = (e.get())
             group = []
             group.append("rsi")
@@ -288,8 +274,6 @@ def addBottomIndicator(what):
         tk.mainloop()
 
     elif what == "macd":
-        global bottomIndicator
-        global DatCounter
         bottomIndicator = "macd"
         DatCounter = 9000
 
