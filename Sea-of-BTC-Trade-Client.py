@@ -1,23 +1,22 @@
-import sys
+import json
+import pandas as pd
+import re
 import tkinter as tk
 from tkinter import ttk
+import urllib.request
+
 import matplotlib
 import matplotlib.animation as animation
-matplotlib.use('TkAgg')
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
-from matplotlib import style
-import pandas as pd
-import json
-import urllib.request
-from pandas.io.json import json_normalize
-import numpy as np
-from matplotlib import pyplot as plt
-from matplotlib.finance import candlestick_ohlc
-
 import matplotlib.dates as mdates
+from matplotlib.finance import candlestick_ohlc
+from matplotlib import pyplot as plt
+from matplotlib import style
 import matplotlib.ticker as mticker
-import time
-import re
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
+                                                NavigationToolbar2TkAgg)
+matplotlib.use('TkAgg')
+import numpy as np
+
 
 style.use('ggplot')
 
